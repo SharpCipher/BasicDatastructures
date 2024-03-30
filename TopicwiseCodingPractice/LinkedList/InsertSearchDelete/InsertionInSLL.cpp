@@ -60,7 +60,17 @@ class SingleLinkedList {
         }
 
         void insertAtEnd(const std::string& data) {
-
+            Node* newNode = new Node(data);
+            if(head == nullptr) {
+                head = newNode;
+                return;
+            }
+            Node* temp = head;
+            while(temp->next) {
+                temp = temp->next;
+            }
+            temp->next = newNode;
+            newNode->next = nullptr;
         }
 
         void displayList() {
@@ -75,7 +85,7 @@ class SingleLinkedList {
 
 int main()
 {
-    SingleLinkedList sll;
+   SingleLinkedList sll;
    std::cout << "Insertion into a Single Linked List....\n";
    while(1) {
         std::cout << "\n1. At beginning\n2. At Position\n3. At end\n4. Display\n5. Exit\n";
@@ -84,15 +94,18 @@ int main()
         int choice;
         std::cin >> choice;
 
+        // Clear the input buffer before reading next input
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
         switch(choice) {
             case 1 :
                 std::cout << "Enter the data: ";
-                std::cin >> data;
+                std::getline(std::cin, data);
                 sll.insertAtBeg(data);
                 break;
             case 2 :
                 std::cout << "Enter the data: ";
-                std::cin >> data;
+                std::getline(std::cin, data);
                 int pos;
                 std::cout << "Enter the position: ";
                 std::cin >> pos;
@@ -100,7 +113,7 @@ int main()
                 break;
             case 3 :
                 std::cout << "Enter the data: ";
-                std::cin >> data;
+                std::getline(std::cin, data);
                 sll.insertAtEnd(data);
                 break;
             case 4 :
