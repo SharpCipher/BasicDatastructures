@@ -30,7 +30,33 @@ class SingleLinkedList {
         }
 
         void insertAtPos(const std::string& data, int pos) {
+            Node* newNode = new Node(data);
+            Node* temp = head;
+            Node* prev = nullptr;
 
+            int c = 1;
+
+            while(temp) {
+                if(c == pos){
+                    newNode->next = temp;
+                    if(prev)
+                        prev->next = newNode;
+                    else
+                        head = newNode;
+
+                    return;
+                }
+                prev = temp;
+                temp = temp->next;
+                c++;
+            }
+            // If the pos exceeds the size of the list, insert at the end
+            if(pos == c){
+                if(prev)
+                    prev->next = newNode;
+                else
+                    head = newNode;
+            }
         }
 
         void insertAtEnd(const std::string& data) {
