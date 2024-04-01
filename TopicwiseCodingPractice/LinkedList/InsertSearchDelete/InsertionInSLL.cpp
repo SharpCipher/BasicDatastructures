@@ -73,6 +73,32 @@ class SingleLinkedList {
             newNode->next = nullptr;
         }
 
+        void deleteTheGivenData(const std::string& data) {
+            if(head == nullptr) {
+                std::cout << "List Empty, " << data << "Not found!\n";
+                return;
+            }
+            else {
+                Node* curr = head;
+                Node* prev = nullptr;
+                while(curr != nullptr) {
+                    if(curr->data == data) {
+                        if(prev == nullptr) { // If the node to be deleted is the head
+                            head = curr->next;
+                        }
+                        else {
+                            prev->next = curr->next;
+                        }
+                        delete curr;
+                        return;
+                    }
+                    prev = curr;
+                    curr = curr->next;
+                }
+                std::cout << data << " Not found in the list\n";
+            }
+        }
+
         void displayList() {
             Node* temp = head;
             while(temp){
@@ -87,13 +113,14 @@ int main()
 {
    SingleLinkedList sll;
    std::cout << "Insertion into a Single Linked List....\n";
-   while(1) {
-        std::cout << "\n1. At beginning\n2. At Position\n3. At end\n4. Display\n5. Exit\n";
+   bool shouldExit = false;
+   while(!shouldExit) {
+        std::cout << "\n1. At beginning\n2. At Position\n3. At end\n4. Display\n5. Delete the Given Data\n6. Exit\n";
         std::cout << "Enter your option: ";
         std::string data;
         int choice;
         std::cin >> choice;
-
+        std::string input;
         // Clear the input buffer before reading next input
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
@@ -121,12 +148,19 @@ int main()
                 sll.displayList();
                 break;
             case 5 :
+                std::cout << "\nEnter the data to be deleted: ";
+                std::getline(std::cin, input);
+                sll.deleteTheGivenData(input);
+                break;
+            case 6 :
                 std::cout << "\nCurrent List Items: \n";
                 sll.displayList();
                 std::cout << "Exiting...\n";
-                return 0;
+                shouldExit = true;
+                break;
             default :
                 std::cout << "Invalid option. Try again!!\n";
+                break;
         }
    }
     
