@@ -98,7 +98,28 @@ class SingleLinkedList {
                 std::cout << data << " Not found in the list\n";
             }
         }
+        void deleteTheLastNode() {
+            if(head == nullptr) {
+                std::cout << "List Empty. Nothing to delete!\n";
+                return;
+            }
+            // If the list contains only one node
+            if(head->next == nullptr) {
+                delete head;
+                head = nullptr;
+                return;
+            }
 
+            Node* curr = head;
+            Node* prev = nullptr;
+            while(curr->next){
+                prev = curr;
+                curr = curr->next;
+            }
+            // Update the next pointer of the second-to-last node to nullptr
+            prev->next = nullptr;
+            delete curr;
+        }
         void displayList() {
             Node* temp = head;
             while(temp){
@@ -112,10 +133,10 @@ class SingleLinkedList {
 int main()
 {
    SingleLinkedList sll;
-   std::cout << "Insertion into a Single Linked List....\n";
+   std::cout << " Operations on a Single Linked List....\n";
    bool shouldExit = false;
    while(!shouldExit) {
-        std::cout << "\n1. At beginning\n2. At Position\n3. At end\n4. Display\n5. Delete the Given Data\n6. Exit\n";
+        std::cout << "\n1. At beginning\n2. At Position\n3. At end\n4. Display\n5. Delete the Given Data\n6. Delete the last node\n7. Exit\n";
         std::cout << "Enter your option: ";
         std::string data;
         int choice;
@@ -153,6 +174,9 @@ int main()
                 sll.deleteTheGivenData(input);
                 break;
             case 6 :
+                sll.deleteTheLastNode();
+                break;
+            case 7 :
                 std::cout << "\nCurrent List Items: \n";
                 sll.displayList();
                 std::cout << "Exiting...\n";
