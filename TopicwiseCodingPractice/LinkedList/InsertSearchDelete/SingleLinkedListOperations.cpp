@@ -120,6 +120,27 @@ class SingleLinkedList {
             prev->next = nullptr;
             delete curr;
         }
+        void searchData(const std::string& searchString) {
+            if(head == nullptr) {
+                std::cout << "Empty list, " << searchString << " Not found!";
+                return;
+            }
+            int pos = 1;
+            int flag = 0;
+            Node* temp = head;
+            while(temp) {
+                if(temp->data == searchString) {
+                    std::cout << searchString << " found at position " << pos << '\n';
+                    flag = 1;
+                    break;
+                }
+                temp = temp->next;
+                pos++;
+            }
+            if(flag == 0) {
+                std::cout << searchString << " Not found!!\n";
+            }
+        }
         void displayList() {
             Node* temp = head;
             while(temp){
@@ -136,12 +157,13 @@ int main()
    std::cout << " Operations on a Single Linked List....\n";
    bool shouldExit = false;
    while(!shouldExit) {
-        std::cout << "\n1. At beginning\n2. At Position\n3. At end\n4. Display\n5. Delete the Given Data\n6. Delete the last node\n7. Exit\n";
+        std::cout << "\n1. At beginning\n2. At Position\n3. At end\n4. Display\n5. Delete the Given Data\n6. Delete the last node\n7. Search data\n8. Exit\n";
         std::cout << "Enter your option: ";
         std::string data;
         int choice;
         std::cin >> choice;
         std::string input;
+        std::string searchString;
         // Clear the input buffer before reading next input
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
@@ -177,6 +199,11 @@ int main()
                 sll.deleteTheLastNode();
                 break;
             case 7 :
+                std::cout << "Enter the data to be searched: ";
+                std::getline(std::cin, searchString);
+                sll.searchData(searchString);
+                break;
+            case 8 :
                 std::cout << "\nCurrent List Items: \n";
                 sll.displayList();
                 std::cout << "Exiting...\n";
