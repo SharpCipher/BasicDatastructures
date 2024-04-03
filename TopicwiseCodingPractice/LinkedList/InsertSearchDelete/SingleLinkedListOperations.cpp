@@ -122,25 +122,22 @@ class SingleLinkedList {
         }
         void searchData(const std::string& searchString) {
             if(head == nullptr) {
-                std::cout << "Empty list, " << searchString << " Not found!";
+                std::cout << "Empty list. " << searchString << " Not found!\n";
                 return;
             }
             int pos = 1;
-            int flag = 0;
             Node* temp = head;
             while(temp) {
                 if(temp->data == searchString) {
                     std::cout << searchString << " found at position " << pos << '\n';
-                    flag = 1;
-                    break;
+                    return;
                 }
                 temp = temp->next;
                 pos++;
             }
-            if(flag == 0) {
-                std::cout << searchString << " Not found!!\n";
-            }
+            std::cout << searchString << " Not found!!\n";
         }
+
         void displayList() {
             Node* temp = head;
             while(temp){
