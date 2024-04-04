@@ -166,7 +166,7 @@ int main()
    while(!shouldExit) {
         std::cout << "\n1. Insert At beginning\n2. Insert At Position\n3. Insert At end\n";
         std::cout << "4. Display the list\n5. Delete the Given Data\n6. Delete the first node\n";
-        std::cout << "\n7.Delete the last node\n8. Search data\n9. Exit\n";
+        std::cout << "7. Delete the last node\n8. Search data\n9. Exit\n";
         std::cout << "Enter your option: ";
         std::string data;
         int choice;
