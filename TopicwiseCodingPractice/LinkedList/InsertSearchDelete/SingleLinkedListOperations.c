@@ -1,16 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
+
+#define IN_DATA_STR 20
 
 struct node {
-    char* data;
+    char data[IN_DATA_STR];
     struct node* next;
 };
 
 struct node* head = NULL;
 
 void insertAtBeg(char* data) {
-
+    struct node* newNode = (struct node*)malloc(sizeof(struct node));
+    strcpy(newNode->data, data);
+    newNode->next = head;
+    head = newNode;
 }
 
 void insertAtPos(char* data, int position) {
@@ -22,7 +28,12 @@ void insertAtEnd(char* data) {
 }
 
 void displayList() {
-
+    struct node* ptr = head;
+    while(ptr != NULL) {
+        printf("%s -> ", ptr->data);
+        ptr = ptr->next;
+    }
+    printf("NULL\n");
 }
 
 void deleteTheGivenData(char* data) {
@@ -49,23 +60,27 @@ int main() {
         printf( "4. Display the list\n5. Delete the Given Data\n6. Delete the first node\n");
         printf( "7. Delete the last node\n8. Search data\n9. Exit\n");
         printf( "Enter your option: ");
-        char* data;
+        char data[IN_DATA_STR];
         int choice;
         scanf("%d", &choice);
-        char* input;
-        char* searchString;
+        char input[IN_DATA_STR];
+        char searchString[IN_DATA_STR];
         // Clear the input buffer before reading next input
-        //std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        while((getchar()) != '\n');
 
         switch(choice) {
             case 1 :
                 printf( "Enter the data: ");
-                fgets(data, 20, stdin);
+                fgets(data, IN_DATA_STR, stdin);
+                // Remove the new line charcter if present
+                if(data[strlen(data) - 1] == '\n') {
+                    data[strlen(data) - 1] = '\0';
+                }
                 insertAtBeg(data);
                 break;
             case 2 :
                 printf( "Enter the data: ");
-                fgets(data, 20, stdin);
+                fgets(data, IN_DATA_STR, stdin);
                 int pos;
                 printf( "Enter the position: ");
                 scanf("%d", &pos);
@@ -73,7 +88,7 @@ int main() {
                 break;
             case 3 :
                 printf( "Enter the data: ");
-                fgets(data, 20, stdin);
+                fgets(data, IN_DATA_STR, stdin);
                 insertAtEnd(data);
                 break;
             case 4 :
@@ -82,7 +97,7 @@ int main() {
                 break;
             case 5 :
                 printf( "\nEnter the data to be deleted: ");
-                fgets(input, 20, stdin);
+                fgets(input, IN_DATA_STR, stdin);
                 deleteTheGivenData(input);
                 break;
             case 6 :
@@ -93,7 +108,7 @@ int main() {
                 break;
             case 8 :
                 printf( "Enter the data to be searched: ");
-                fgets(searchString, 20, stdin);
+                fgets(searchString, IN_DATA_STR, stdin);
                 searchData(searchString);
                 break;
             case 9 :
