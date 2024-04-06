@@ -51,11 +51,9 @@ class SingleLinkedList {
                 c++;
             }
             // If the pos exceeds the size of the list, insert at the end
-            if(pos == c){
-                if(prev)
-                    prev->next = newNode;
-                else
-                    head = newNode;
+            if(pos > c){
+                std::cout << "Invalid position!!\n";
+                return;
             }
         }
 
