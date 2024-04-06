@@ -20,7 +20,31 @@ void insertAtBeg(char* data) {
 }
 
 void insertAtPos(char* data, int position) {
-    
+    struct node* newNode = (struct node*)malloc(sizeof(struct node));
+    strcpy(newNode->data, data);
+
+    int c = 1;
+    struct node* curr = head;
+    struct node* prev = NULL;
+    while(curr) {
+        if(position == c) {
+            newNode->next = curr;
+            if(prev)
+                prev->next = newNode; 
+            else
+                head = newNode;
+
+            return;
+        }
+        prev = curr;
+        curr = curr->next;
+        c++;
+    }
+    // If the position exceeds the size of the list, insert at the end
+    if(position > c) {
+        printf("Invalid position.\n");
+        return;
+    }
 }
 
 void insertAtEnd(char* data) {
@@ -84,11 +108,19 @@ int main() {
                 int pos;
                 printf( "Enter the position: ");
                 scanf("%d", &pos);
+                // Remove the new line charcter if present
+                if(data[strlen(data) - 1] == '\n') {
+                    data[strlen(data) - 1] = '\0';
+                }
                 insertAtPos(data, pos);
                 break;
             case 3 :
                 printf( "Enter the data: ");
                 fgets(data, IN_DATA_STR, stdin);
+                // Remove the new line charcter if present
+                if(data[strlen(data) - 1] == '\n') {
+                    data[strlen(data) - 1] = '\0';
+                }
                 insertAtEnd(data);
                 break;
             case 4 :
