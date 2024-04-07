@@ -48,7 +48,19 @@ void insertAtPos(char* data, int position) {
 }
 
 void insertAtEnd(char* data) {
-    
+    struct node* newNode = (struct node*)malloc(sizeof(struct node));
+    strcpy(newNode->data, data);
+    if(head == NULL) {
+        head = newNode;
+        newNode->next = NULL;     
+        return;
+    }
+    struct node* temp = head;
+    while(temp->next) {
+        temp = temp->next;
+    }
+    temp->next = newNode;
+    newNode->next = NULL;
 }
 
 void displayList() {
