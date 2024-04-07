@@ -72,8 +72,29 @@ void displayList() {
     printf("NULL\n");
 }
 
-void deleteTheGivenData(char* data) {
-
+void deleteTheGivenData(char* inputData) {
+    if(head == NULL) {
+        printf("The list is empty!!\n");
+        return;
+    }
+    struct node* curr = head;
+    struct node* prev = NULL;
+    while(curr) {
+        if(strcmp(curr->data, inputData) == 0) {
+            if(prev == NULL) {
+                head = curr->next;
+            }
+            else{
+                prev->next = curr->next;
+            }
+            free(curr);
+            printf("%s deleted from the list.\n", inputData);
+            return;
+        }
+        prev = curr;
+        curr = curr->next;
+    }
+    printf("%s not found in the list!!\n", inputData);
 }
 
 void deleteTheFirstNode(){
@@ -142,6 +163,10 @@ int main() {
             case 5 :
                 printf( "\nEnter the data to be deleted: ");
                 fgets(input, IN_DATA_STR, stdin);
+                // Remove the new line charcter if present
+                if(input[strlen(input) - 1] == '\n') {
+                    input[strlen(input) - 1] = '\0';
+                }
                 deleteTheGivenData(input);
                 break;
             case 6 :
