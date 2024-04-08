@@ -72,30 +72,40 @@ class SingleLinkedList {
         }
 
         void deleteTheGivenData(const std::string& data) {
+            int deletionCount = 0;
             if(head == nullptr) {
                 std::cout << "List Empty, " << data << "Not found!\n";
                 return;
             }
-            else {
                 Node* curr = head;
                 Node* prev = nullptr;
                 while(curr != nullptr) {
                     if(curr->data == data) {
                         if(prev == nullptr) { // If the node to be deleted is the head
                             head = curr->next;
+                            delete curr;
+                            curr = head;
                         }
                         else {
                             prev->next = curr->next;
+                            delete curr;
+                            curr = prev->next;
                         }
-                        delete curr;
-                        return;
+                        deletionCount++;
                     }
-                    prev = curr;
-                    curr = curr->next;
+                    else {
+                        prev = curr;
+                        curr = curr->next;
+                    }
                 }
-                std::cout << data << " Not found in the list\n";
-            }
+                if(deletionCount > 0) {
+                    std::cout << deletionCount << " instances of " << data << " deleted from the list\n";
+                }
+                else {
+                    std::cout << data << " not found in the list!!\n";
+                }
         }
+
         void deleteTheFirstNode() {
             if(head == nullptr) {
                 std::cout << "List Empty. Nothing to delete!\n";
