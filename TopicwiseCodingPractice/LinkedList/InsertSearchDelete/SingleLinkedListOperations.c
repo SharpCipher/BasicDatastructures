@@ -98,7 +98,13 @@ void deleteTheGivenData(char* inputData) {
 }
 
 void deleteTheFirstNode(){
-
+    if(head == NULL) {
+        printf("The list is empty!!\n");
+        return;
+    }
+    struct node* temp = head;
+    head = head->next;
+    free(temp);
 }
 
 void deleteTheLastNode() {
