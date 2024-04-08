@@ -77,24 +77,34 @@ void deleteTheGivenData(char* inputData) {
         printf("The list is empty!!\n");
         return;
     }
+    int deletionCount = 0;
     struct node* curr = head;
     struct node* prev = NULL;
     while(curr) {
         if(strcmp(curr->data, inputData) == 0) {
             if(prev == NULL) {
                 head = curr->next;
+                free(curr);
+                curr = head;
             }
             else{
                 prev->next = curr->next;
+                free(curr);
+                curr = prev->next;
             }
-            free(curr);
-            printf("%s deleted from the list.\n", inputData);
-            return;
+            deletionCount++;
         }
-        prev = curr;
-        curr = curr->next;
+        else {
+            prev = curr;
+            curr = curr->next;
+        }
     }
-    printf("%s not found in the list!!\n", inputData);
+    if(deletionCount > 0){
+        printf("%d instances of %s deleted from the list!!\n", deletionCount, inputData);
+    }
+    else {
+        printf("%s not found in the list!!\n", inputData);
+    }
 }
 
 void deleteTheFirstNode(){
