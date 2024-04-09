@@ -118,7 +118,23 @@ void deleteTheFirstNode(){
 }
 
 void deleteTheLastNode() {
-
+    if(head == NULL) {
+        printf("The list is empty!!\n");
+        return;
+    }
+    if(head->next == NULL) {
+        free(head);
+        head = NULL;
+        return;
+    }
+    struct node* curr = head;
+    struct node* prev = NULL;
+    while(curr->next) {
+        prev = curr;
+        curr = curr->next;
+    }
+    prev->next = NULL;
+    free(curr);
 }
 
 void searchData(char* data) {
