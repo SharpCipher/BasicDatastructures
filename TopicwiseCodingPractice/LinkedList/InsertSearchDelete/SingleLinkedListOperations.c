@@ -138,7 +138,21 @@ void deleteTheLastNode() {
 }
 
 void searchData(char* data) {
-
+    if(head == NULL) {
+        printf("The list is empty!!\n");
+        return;
+    }
+    int pos = 1;
+    struct node* temp = head;
+    while(temp) {
+        if(strcmp(temp->data, data) == 0) {
+            printf("%s found at position %d\n", data, pos);
+            return;
+        }
+        temp = temp->next;
+        pos++;
+    }
+    printf("%s not found in the list!\n", data);
 }
 
 int main() {
@@ -210,6 +224,10 @@ int main() {
             case 8 :
                 printf( "Enter the data to be searched: ");
                 fgets(searchString, IN_DATA_STR, stdin);
+                // Remove the new line charcter if present
+                if(searchString[strlen(searchString) - 1] == '\n') {
+                    searchString[strlen(searchString) - 1] = '\0';
+                }
                 searchData(searchString);
                 break;
             case 9 :
