@@ -24,7 +24,10 @@ class DoubleLinkedList {
         }
 
         void insertAtBeg(const std::string& data) {
-
+            Node* newNode = new Node(data);
+            newNode->prev = nullptr;
+            newNode->next = head;
+            head = newNode;
         }
 
         void insertAtPos(const std::string& data, int pos) {
@@ -52,7 +55,12 @@ class DoubleLinkedList {
         }
 
         void displayList() {
-
+            Node* temp = head;
+            while(temp) {
+                std::cout << temp->data << " ";
+                temp = temp->next;
+            }
+            std::cout << '\n';
         }
 };
 
