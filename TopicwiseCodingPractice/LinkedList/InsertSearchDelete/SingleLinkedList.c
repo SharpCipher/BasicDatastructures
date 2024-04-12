@@ -40,7 +40,7 @@ void insertAtPos(char* data, int position) {
         curr = curr->next;
         c++;
     }
-    // If the position exceeds the size of the list, insert at the end
+    // If the position exceeds the size of the list
     if(position > c) {
         printf("Invalid position.\n");
         return;

@@ -50,7 +50,7 @@ class SingleLinkedList {
                 temp = temp->next;
                 c++;
             }
-            // If the pos exceeds the size of the list, insert at the end
+            // If the pos exceeds the size of the list
             if(pos > c){
                 std::cout << "Invalid position!!\n";
                 return;

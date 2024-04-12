@@ -31,27 +31,49 @@ class DoubleLinkedList {
         }
 
         void insertAtPos(const std::string& data, int pos) {
-
+            Node* newNode = new Node(data);
+            int c = 1;
+            Node* temp = head;
+            while(temp) {
+                if(c == pos) {
+                    newNode->prev = temp->prev;
+                    newNode->next = temp;
+                    if(temp->prev)
+                        temp->prev->next = newNode;
+                    temp->prev = newNode;
+                    if(pos == 1){
+                        head = newNode;
+                    }
+                    return;
+                }
+                temp = temp->next;
+                c++;
+            }
+            // If the pos exceeds the size of the list
+            if(pos > c){
+                std::cout << "Invalid position!!\n";
+                return;
+            }
         }
 
         void insertAtEnd(const std::string& data) {
-
+            // Todo
         }
 
         void deleteTheFirstNode() {
-
+            // Todo
         }
 
         void deleteTheGivenData(const std::string& data) {
-
+            // Todo
         }
 
         void deleteTheLastNode() {
-
+            // Todo
         }
 
         void searchData(const std::string& inputData) {
-
+            // Todo
         }
 
         void displayList() {
