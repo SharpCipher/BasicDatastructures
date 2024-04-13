@@ -62,9 +62,23 @@ class DoubleLinkedList {
                 temp->next->prev = newNode;
             temp->next = newNode;
         }
-        
+
         void insertAtEnd(const std::string& data) {
-            // Todo
+            Node* newNode = new Node(data);
+            newNode->next = nullptr;
+            // If the list is empty, make the new node the head
+            if(head == nullptr) {
+                head = newNode;
+                newNode->prev = nullptr;
+                return;
+            }
+
+            Node* temp = head;
+            while(temp->next) {
+                temp = temp->next;
+            }
+            temp->next = newNode;
+            newNode->prev = temp;
         }
 
         void deleteTheFirstNode() {
