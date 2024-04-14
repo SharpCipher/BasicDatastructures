@@ -1,5 +1,4 @@
 #include <iostream>
-
 struct Node{
     std::string data;
     struct Node* prev;
@@ -94,7 +93,41 @@ class DoubleLinkedList {
         }
 
         void deleteTheGivenData(const std::string& data) {
-            // Todo
+            if(head == nullptr) {
+                std::cout << "List is empty, Can't delete!!\n";
+                return;
+            }
+            Node* temp = head;
+            int deletionCount = 0;
+            while(temp) {
+                if(temp->data == data) {
+                    if(temp == head) {
+                        head = temp->next;
+                        if(head != nullptr) {
+                            head->prev = nullptr;
+                        }
+                        delete temp;
+                        temp = head;
+                        deletionCount++;
+                    }
+                    else {
+                        temp->prev->next = temp->next;
+                        if(temp->next != nullptr) {
+                            temp->next->prev = temp->prev;
+                        }
+                        Node* toDelete = temp;
+                        temp = temp->next;
+                        delete toDelete;
+                        deletionCount++;
+                    }
+                }
+                else {
+                    temp = temp->next;
+                }
+            }
+            if(deletionCount == 0) {
+                std::cout << data << " Not found in the list!!\n";
+            }
         }
 
         void deleteTheLastNode() {
