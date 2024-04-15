@@ -152,7 +152,21 @@ class DoubleLinkedList {
         }
 
         void searchData(const std::string& inputData) {
-            // Todo
+            if(head == nullptr) {
+                std::cout << "List is empty, Can't delete!!\n";
+                return;
+            }
+            int pos = 1;
+            Node* temp = head;
+            while(temp) {
+                if(temp->data == inputData) {
+                    std::cout << inputData << " found at position: " << pos << '\n';
+                    return; 
+                }
+                temp = temp->next;
+                pos++;
+            }
+            std::cout << inputData << " not found in the list\n";
         }
 
         void displayList() {
