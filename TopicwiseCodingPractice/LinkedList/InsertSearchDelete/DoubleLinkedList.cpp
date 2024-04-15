@@ -131,7 +131,24 @@ class DoubleLinkedList {
         }
 
         void deleteTheLastNode() {
-            // Todo
+            if(head == nullptr) {
+                std::cout << "List is empty, Can't delete!!\n";
+                return;
+            }
+            if(head->next == nullptr) {
+                delete head;
+                head = nullptr;
+                return;
+            }
+            Node* temp = head;
+            while(temp->next) {
+                temp = temp->next;
+            }
+            Node* toDelete = temp;
+            if(temp->prev != nullptr) {
+                temp->prev->next = nullptr;
+            }
+            delete toDelete;
         }
 
         void searchData(const std::string& inputData) {
