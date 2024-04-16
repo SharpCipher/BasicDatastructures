@@ -30,7 +30,16 @@ class Stack {
         }
 
         std::string pop() {
-            return "";
+            if(head == nullptr) {
+                return "Stack Empty, Can't delete!!\n";
+            }
+            std::string del = head->data;
+            Node* temp = head;
+            head = head->next;
+            delete temp;
+            temp = head;
+            std::cout << "Popped: ";
+            return del;
         }
 
         void displayStack() {
@@ -53,6 +62,7 @@ int main()
         std::string data;
         std::string popped;
         int choice;
+        std::cout << "Enter your choice: ";
         std::cin >> choice;
 
         // Clear the input buffer before reading next input
@@ -66,7 +76,7 @@ int main()
                 break;
             case 2 :
                 popped = st.pop();
-                std::cout << "Popped " << popped << '\n';
+                std::cout << popped << '\n';
                 break;
             case 3 :
                 std::cout << "Stack Elements: \n";
