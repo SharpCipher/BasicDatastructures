@@ -12,7 +12,7 @@ class DoubleLinkedList {
     public:
         DoubleLinkedList() : head(nullptr) {};
 
-        /*~DoubleLinkedList() {
+        ~DoubleLinkedList() {
             Node* curr = head;
             while(curr) {
                 Node* next = curr->next;
