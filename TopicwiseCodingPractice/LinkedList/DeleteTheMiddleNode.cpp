@@ -49,17 +49,20 @@ class SingleLinkedList{
             delete head;
             return;
         }
+        // Initialize slow and fast pointers to reach the middle node
         Node* ptr1 = head;
         Node* ptr2 = head;
 
+        // Find the middle node and previous of the middle node to store the previous of
+        // slow pointer
         Node* prev = nullptr;
-
         while(ptr2 != nullptr && ptr2->next != nullptr) {
             ptr2 = ptr2->next->next;
             prev = ptr1;
             ptr1 = ptr1->next;
-        }
+        } // By the time the fast pointer(ptr2) reaches the end of the list, slow pointer is at middle node
 
+        // Delete the middle node
         prev->next = ptr1->next;
         delete ptr1;
     }
