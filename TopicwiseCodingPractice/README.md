@@ -16,6 +16,7 @@ problems that uses the constructs/features of that DS, slowly goes to some inter
 
 While I keep my learning journey as consistent as possible, I also aim to focus on improvement at both concept and application levels.
 
-I'll keep adding more and more as my journey to become a better coder and better version of myself.
+I'll keep adding more and more as my journey to become a better coder and better version of myself goes on.
 
-Keep learning and Have a Blast!!!
+
+Keep coding!!
