@@ -20,6 +20,23 @@ class BinaryTree {
         }
     }
 
+    void inorderTraversal(TreeNode* root) const {
+        if (root != nullptr) {
+            inorderTraversal(root->left);
+            std::cout << root->data << " ";
+            inorderTraversal(root->right);
+        }
+    }
+    void postorderTraversal(TreeNode* root) const{
+        if (root != nullptr) {
+            postorderTraversal(root->left);
+            postorderTraversal(root->right);
+            std::cout << root->data << " ";
+        }
+    }   
+
+
+
     public:
         BinaryTree() : root(nullptr) {}
 
@@ -67,6 +84,16 @@ class BinaryTree {
             std::cout << '\n';
         }
 
+        void displayInOrder() const {
+            inorderTraversal(root);
+            std::cout << '\n';
+        }
+
+        void displayPostOrder() const {
+            postorderTraversal(root);
+            std::cout << '\n';
+        }
+
 };
 
 int main()
@@ -79,7 +106,14 @@ int main()
     tree.insert(4);
     tree.insert(8);
     
+    std::cout << "PreOrder Traversal: ";
     tree.displayPreOrder();
+
+    std::cout << "InOrder Traversal: ";
+    tree.displayInOrder();
+
+    std::cout << "PostOrder Traversal: ";
+    tree.displayPostOrder();
 
     return 0;
 }
