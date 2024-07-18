@@ -94,6 +94,31 @@ class BinaryTree {
             std::cout << '\n';
         }
 
+        bool search(TreeNode* root, int data) {
+            if (root == nullptr) {
+                return false;
+            }
+
+            if (root->data == data) {
+                return true;
+            }
+
+            if (data < root->data) {
+                return search(root->left, data);
+            } else {
+                return search(root->right, data);
+            }
+        }
+
+        void searchBT(int elem) {
+            if(search(root, elem)) {
+                std::cout << "element " << elem << " found!\n";
+            }
+            else {
+                std::cout << "element " << elem << " not found!\n";
+            }
+        }
+
 };
 
 int main()
@@ -114,6 +139,9 @@ int main()
 
     std::cout << "PostOrder Traversal: ";
     tree.displayPostOrder();
+
+    tree.searchBT(7);
+    tree.searchBT(1);
 
     return 0;
 }
