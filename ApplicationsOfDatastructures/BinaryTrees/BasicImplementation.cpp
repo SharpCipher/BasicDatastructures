@@ -119,6 +119,13 @@ class BinaryTree {
             }
         }
 
+        int findMin() {
+            while(root->left != nullptr)
+                root = root->left;
+
+            return root->data;
+        }
+
 };
 
 int main()
@@ -129,7 +136,7 @@ int main()
     tree.insert(7);
     tree.insert(2);
     tree.insert(4);
-    tree.insert(8);
+    tree.insert(1);
     
     std::cout << "PreOrder Traversal: ";
     tree.displayPreOrder();
@@ -142,6 +149,8 @@ int main()
 
     tree.searchBT(7);
     tree.searchBT(1);
+
+    std::cout << "Minimum element: " << tree.findMin() << '\n';
 
     return 0;
 }
