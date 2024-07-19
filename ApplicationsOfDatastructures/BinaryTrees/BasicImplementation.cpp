@@ -126,6 +126,47 @@ class BinaryTree {
             return root->data;
         }
 
+        TreeNode* findMin(TreeNode* root) {
+            while(root->left != nullptr){
+                root = root->left;
+            }
+            return root;
+        }
+
+        TreeNode* deleteNode(TreeNode* root, int data) {
+            if(root == nullptr)
+                return root;
+            if(data < root->data) {
+                root->left = deleteNode(root->left, data);
+            }
+            else if(data > root->data) {
+                root->right = deleteNode(root->right, data);
+            }
+            else {
+                if(root->left == nullptr) {
+                    TreeNode* temp = root->right;
+                    delete root;
+                    return temp;
+                }
+                else if(root->right == nullptr) {
+                    TreeNode* temp = root->left;
+                    delete root;
+                    return temp;
+                }
+
+                TreeNode* tn = findMin(root->right);
+                root->data = tn->data;
+                root->right = deleteNode(root->right, tn->data);
+            }
+
+            return root;
+        }
+
+        void deleteTreeNode(int data) {
+            TreeNode* del = deleteNode(root, data);
+            std::cout << "deleted " << del->data << '\n';
+        }
+
 };
 
 int main()
@@ -151,6 +192,9 @@ int main()
     tree.searchBT(1);
 
     std::cout << "Minimum element: " << tree.findMin() << '\n';
+
+    tree.deleteTreeNode(7);
+    tree.displayInOrder();
 
     return 0;
 }
