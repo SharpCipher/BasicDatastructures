@@ -10,45 +10,103 @@ class TreeNode {
 };
 
 class BinaryTree {
-    TreeNode* root;
-
-    void preOrder(TreeNode* node) const {
-        if(node) {
-            std::cout << node->data << " ";
-            preOrder(node->left);
-            preOrder(node->right);
+    private:
+        TreeNode* root;
+        
+        void preOrder(TreeNode* node) const {
+            if(node) {
+                std::cout << node->data << " ";
+                preOrder(node->left);
+                preOrder(node->right);
+            }
         }
-    }
 
-    void inorderTraversal(TreeNode* root) const {
-        if (root != nullptr) {
-            inorderTraversal(root->left);
-            std::cout << root->data << " ";
-            inorderTraversal(root->right);
+        void inOrder(TreeNode* node) const {
+            if(node) {
+                inOrder(node->left);
+                std::cout << node->data << " ";
+                inOrder(node->right);
+            }
         }
-    }
-    void postorderTraversal(TreeNode* root) const{
-        if (root != nullptr) {
-            postorderTraversal(root->left);
-            postorderTraversal(root->right);
-            std::cout << root->data << " ";
-        }
-    }   
 
-
-
-    public:
-        BinaryTree() : root(nullptr) {}
-
-        ~BinaryTree() {
-            destroyTree(root); 
+        void postOrder(TreeNode* node) const {
+            if(node) {
+                postOrder(node->left);
+                postOrder(node->right);
+                std::cout << node->data << " ";
+            }
         }
 
         void destroyTree(TreeNode* node) {
             if(node) {
                 destroyTree(node->left);
                 destroyTree(node->right);
+
+                delete node;
             }
+        }
+
+        TreeNode* findMin(TreeNode* node) const {
+            while(node->left != nullptr) {
+                node = node->left;
+            }
+            return node;
+        }
+
+        TreeNode* deleteNode(TreeNode* root, int data) {
+            if(root == nullptr) {
+                return root;
+            }
+
+            if(data < root->data) {
+                root->left = deleteNode(root->left, data);
+            }
+            else if(data > root->data) {
+                root->right = deleteNode(root->right, data);
+            }
+            else {
+                if(root->left == nullptr) {
+                    TreeNode* temp = root->right;
+                    delete root;
+                    return temp;
+                }
+                else if(root->right == nullptr) {
+                    TreeNode* temp = root->left;
+                    delete root;
+                    return temp;
+                }
+
+                TreeNode* temp = findMin(root->right);
+                root->data = temp->data;
+                root->right = deleteNode(root->right, temp->data);
+            }
+
+            return root;
+
+        }
+
+        bool search(TreeNode* node, int data) const {
+            if(node == nullptr) {
+                return false;
+            }
+
+            if(node->data == data) {
+                return true;
+            }
+
+            if(data < node->data) {
+                return search(node->left, data);
+            }
+            else {
+                return search(node->right, data);
+            }
+        }
+
+    public:
+        BinaryTree() : root(nullptr) {}
+
+        ~BinaryTree() {
+            destroyTree(root);
         }
 
         void insert(int value) {
@@ -85,86 +143,36 @@ class BinaryTree {
         }
 
         void displayInOrder() const {
-            inorderTraversal(root);
+            inOrder(root);
             std::cout << '\n';
         }
 
         void displayPostOrder() const {
-            postorderTraversal(root);
+            postOrder(root);
             std::cout << '\n';
         }
 
-        bool search(TreeNode* root, int data) {
-            if (root == nullptr) {
-                return false;
-            }
-
-            if (root->data == data) {
-                return true;
-            }
-
-            if (data < root->data) {
-                return search(root->left, data);
-            } else {
-                return search(root->right, data);
-            }
-        }
-
-        void searchBT(int elem) {
-            if(search(root, elem)) {
-                std::cout << "element " << elem << " found!\n";
+        void searchBT(int data) const {
+            if(search(root, data)) {
+                std::cout << "Data " << data << " found\n";
             }
             else {
-                std::cout << "element " << elem << " not found!\n";
+                std::cout << "Data " << data << " not found!\n";
             }
         }
 
-        int findMin() {
-            while(root->left != nullptr)
-                root = root->left;
-
-            return root->data;
-        }
-
-        TreeNode* findMin(TreeNode* root) {
-            while(root->left != nullptr){
-                root = root->left;
-            }
-            return root;
-        }
-
-        TreeNode* deleteNode(TreeNode* root, int data) {
-            if(root == nullptr)
-                return root;
-            if(data < root->data) {
-                root->left = deleteNode(root->left, data);
-            }
-            else if(data > root->data) {
-                root->right = deleteNode(root->right, data);
+        int findMin() const {
+            if(root == nullptr) {
+                throw std::runtime_error("Tree is empty!");
             }
             else {
-                if(root->left == nullptr) {
-                    TreeNode* temp = root->right;
-                    delete root;
-                    return temp;
-                }
-                else if(root->right == nullptr) {
-                    TreeNode* temp = root->left;
-                    delete root;
-                    return temp;
-                }
-
-                TreeNode* tn = findMin(root->right);
-                root->data = tn->data;
-                root->right = deleteNode(root->right, tn->data);
+                return findMin(root)->data;
             }
-
-            return root;
         }
 
         void deleteTreeNode(int data) {
-            TreeNode* del = deleteNode(root, data);
-            std::cout << "deleted " << del->data << '\n';
+            root = deleteNode(root, data);
+            std::cout << "Deleted " << data << '\n';
         }
 
 };
