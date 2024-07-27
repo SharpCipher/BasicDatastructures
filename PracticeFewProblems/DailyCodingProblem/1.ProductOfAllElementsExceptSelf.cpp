@@ -51,3 +51,17 @@ int main()
 
     return 0;
 }
+
+/*
+Notes:
+we can use two passes through the array to avoid division and achieve an efficient solution.
+The idea is to create two additional arrays (or use two temporary variables) to store the product of all elements to
+the left and the right of each index, then multiply these together for the final result.
+
+Left Product Array: Create an array where each element at index i contains the product of all elements to the left of i in
+the original array.
+Right Product Array: Similarly, create another array where each element at index i contains the product of all elements to
+the right of i in the original array.
+Result Array: The result at each index i is the product of the corresponding elements from the Left Product Array and 
+the Right Product Array.
+*/
