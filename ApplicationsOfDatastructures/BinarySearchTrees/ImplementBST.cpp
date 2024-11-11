@@ -34,7 +34,20 @@ public:
         std::cout << '\n';
     }
 
+    // Find max element in the BST
+    int findMax() const {
+        return findMaxRec(root)->data;
+    }
+
 private:
+    Node* findMaxRec(Node* node) const{
+        while(node->right != nullptr) {
+            node = node->right;
+        }
+
+        return node;
+    }
+
     void displayRec(Node* node) const {
         if(node == nullptr) {
             return;
@@ -156,7 +169,8 @@ int main()
 
     std::cout << "BST in-order traversal: ";
     bst.display();
-    
+
+    std::cout << "Current Maximum element in BST: " << bst.findMax() << '\n';
 
     return 0;
 }
