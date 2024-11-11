@@ -28,7 +28,23 @@ public:
         root = deleteRec(root, value);
     }
 
+    // Display all values in sorted order(in-order traversal)
+    void display() const {
+        displayRec(root);
+        std::cout << '\n';
+    }
+
 private:
+    void displayRec(Node* node) const {
+        if(node == nullptr) {
+            return;
+        }
+
+        displayRec(node->left);
+        std::cout << node->data << " ";
+        displayRec(node->right);
+
+    }
     Node* insertRec(Node* node, int value) {
         if(node == nullptr) {
             return new Node(value);
@@ -133,6 +149,14 @@ int main()
     std::cout << "After deletion of value 4:\n";
     std::cout << "Search for 4: " << (bst.searchValue(4) ? "Found" : "Not Found") << '\n';
     std::cout << "Search for 3: " << (bst.searchValue(3) ? "Found" : "Not Found") << '\n';
+
+    bst.insertValue(99);
+    bst.insertValue(56);
+    bst.insertValue(23);
+
+    std::cout << "BST in-order traversal: ";
+    bst.display();
+    
 
     return 0;
 }
