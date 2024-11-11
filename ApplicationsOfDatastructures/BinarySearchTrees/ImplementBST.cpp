@@ -39,6 +39,11 @@ public:
         return findMaxRec(root)->data;
     }
 
+    // Find Min element in the BST
+    int findMin() const {
+        return findMinRec(root)->data;
+    }
+
 private:
     Node* findMaxRec(Node* node) const{
         while(node->right != nullptr) {
@@ -126,7 +131,7 @@ private:
             // Case 3: Node has two childern
             else {
                 // Find the in-order successor (Smallest in the right subtree)
-                Node* successor = findMin(node->right);
+                Node* successor = findMinRec(node->right);
                 node->data = successor->data; // Replace with successor's data
                 node->right = deleteRec(node->right, successor->data); // Delete successor
             }
@@ -136,7 +141,7 @@ private:
     }
 
     // Helper function to find the minimum node in a subtree
-    Node* findMin(Node* node) {
+    Node* findMinRec(Node* node) const{
         while(node->left != nullptr) {
             node = node->left;
         }
@@ -171,6 +176,7 @@ int main()
     bst.display();
 
     std::cout << "Current Maximum element in BST: " << bst.findMax() << '\n';
-
+    std::cout << "Current Minimum element in BST: " << bst.findMin() << '\n';
+ 
     return 0;
 }
