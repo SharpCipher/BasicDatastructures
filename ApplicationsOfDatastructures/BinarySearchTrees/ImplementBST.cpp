@@ -44,7 +44,18 @@ public:
         return findMinRec(root)->data;
     }
 
+    // Find the Depth(Height) of the BST
+    int height() const {
+        return heightRec(root);
+    }
+
 private:
+    int heightRec(Node* node) const {
+        if(node == nullptr) {
+            return -1;
+        }
+        return 1 + std::max(heightRec(node->left), heightRec(node->right));
+    }
     Node* findMaxRec(Node* node) const{
         while(node->right != nullptr) {
             node = node->right;
@@ -168,7 +179,7 @@ int main()
     std::cout << "Search for 4: " << (bst.searchValue(4) ? "Found" : "Not Found") << '\n';
     std::cout << "Search for 3: " << (bst.searchValue(3) ? "Found" : "Not Found") << '\n';
 
-    bst.insertValue(99);
+    bst.insertValue(18);
     bst.insertValue(56);
     bst.insertValue(23);
 
@@ -177,6 +188,16 @@ int main()
 
     std::cout << "Current Maximum element in BST: " << bst.findMax() << '\n';
     std::cout << "Current Minimum element in BST: " << bst.findMin() << '\n';
- 
+
+    std::cout << "Length of the longest path from the root to leaf: " << bst.height() << '\n';
+    
+    bst.insertValue(2);
+    bst.insertValue(245);
+    bst.insertValue(168);
+
+    std::cout << "Current Maximum element in BST: " << bst.findMax() << '\n';
+    std::cout << "Current Minimum element in BST: " << bst.findMin() << '\n';
+    std::cout << "Length of the longest path from the root to leaf: " << bst.height() << '\n';
+
     return 0;
 }
