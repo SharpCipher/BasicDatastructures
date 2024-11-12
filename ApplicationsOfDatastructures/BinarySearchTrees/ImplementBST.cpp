@@ -49,7 +49,19 @@ public:
         return heightRec(root);
     }
 
+    // Find the count of nodes in BST
+    int countNodes() const {
+        return countNodesRec(root);
+    }
+
 private:
+    int countNodesRec(Node* node) const {
+        if(node == nullptr) {
+            return 0;
+        }
+        return 1 + countNodesRec(node->left) + countNodesRec(node->right);
+    }
+
     int heightRec(Node* node) const {
         if(node == nullptr) {
             return -1;
@@ -171,6 +183,7 @@ int main()
     bst.insertValue(1);
     bst.insertValue(4);
 
+    std::cout << "No.of nodes present in BST: " << bst.countNodes() << '\n';
     std::cout << "Search for 4: " << (bst.searchValue(4) ? "Found" : "Not Found") << '\n';
     std::cout << "Search for 6: " << (bst.searchValue(6) ? "Found" : "Not Found") << '\n';
 
@@ -178,11 +191,12 @@ int main()
     std::cout << "After deletion of value 4:\n";
     std::cout << "Search for 4: " << (bst.searchValue(4) ? "Found" : "Not Found") << '\n';
     std::cout << "Search for 3: " << (bst.searchValue(3) ? "Found" : "Not Found") << '\n';
+    std::cout << "No.of nodes present in BST: " << bst.countNodes() << '\n';
 
     bst.insertValue(18);
     bst.insertValue(56);
     bst.insertValue(23);
-
+    std::cout << "No.of nodes present in BST: " << bst.countNodes() << '\n';
     std::cout << "BST in-order traversal: ";
     bst.display();
 
@@ -194,7 +208,7 @@ int main()
     bst.insertValue(2);
     bst.insertValue(245);
     bst.insertValue(168);
-
+    std::cout << "No.of nodes present in BST: " << bst.countNodes() << '\n';
     std::cout << "Current Maximum element in BST: " << bst.findMax() << '\n';
     std::cout << "Current Minimum element in BST: " << bst.findMin() << '\n';
     std::cout << "Length of the longest path from the root to leaf: " << bst.height() << '\n';
