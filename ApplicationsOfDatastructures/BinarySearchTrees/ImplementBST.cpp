@@ -54,7 +54,21 @@ public:
         return countNodesRec(root);
     }
 
+    // Check if a tree is BST
+    bool isBST() const {
+        return isBSTRec(root, nullptr, nullptr);
+    }
+
 private:
+    bool isBSTRec(Node* node, Node* minNode, Node* maxNode) const{
+        if(node == nullptr)
+            return true;
+        if((minNode && node->data <= minNode->data) || (maxNode && node->data > maxNode->data)) {
+            return false;
+        }
+        return isBSTRec(node->left, minNode, node) && isBSTRec(node->right, node, maxNode);
+    }
+
     int countNodesRec(Node* node) const {
         if(node == nullptr) {
             return 0;
@@ -212,6 +226,8 @@ int main()
     std::cout << "Current Maximum element in BST: " << bst.findMax() << '\n';
     std::cout << "Current Minimum element in BST: " << bst.findMin() << '\n';
     std::cout << "Length of the longest path from the root to leaf: " << bst.height() << '\n';
+
+    std::cout << "Is the current tree is a BST: " << (bst.isBST() ? "Yes" : "No")<< '\n';
 
     return 0;
 }
