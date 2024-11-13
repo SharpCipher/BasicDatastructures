@@ -59,7 +59,23 @@ public:
         return isBSTRec(root, nullptr, nullptr);
     }
 
+    // Release or Clear all nodes
+    void clear() {
+        clearRec(root);
+        root = nullptr;
+    }
+
 private:
+    void clearRec(Node* node) {
+        if(node == nullptr) {
+            return;
+        }
+        clearRec(node->left);
+        clearRec(node->right);
+
+        delete node;
+    }
+
     bool isBSTRec(Node* node, Node* minNode, Node* maxNode) const{
         if(node == nullptr)
             return true;
@@ -229,5 +245,8 @@ int main()
 
     std::cout << "Is the current tree is a BST: " << (bst.isBST() ? "Yes" : "No")<< '\n';
 
+    std::cout << "-------Delete the Tree----" << '\n';
+    bst.clear();
+    bst.display();
     return 0;
 }
