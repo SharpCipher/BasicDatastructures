@@ -28,11 +28,13 @@ public:
         root = deleteRec(root, value);
     }
 
-    // Display all values in sorted order(in-order traversal)
-    void display() const {
-        displayRec(root);
+    // In-order traversal
+    void inorder() const {
+        inorderTraversal(root);
         std::cout << '\n';
     }
+
+
 
     // Find max element in the BST
     int findMax() const {
@@ -64,6 +66,9 @@ public:
         clearRec(root);
         root = nullptr;
     }
+
+    // PreOrder traversal
+
 
 private:
     void clearRec(Node* node) {
@@ -106,14 +111,14 @@ private:
         return node;
     }
 
-    void displayRec(Node* node) const {
+    void inorderTraversal(Node* node) const {
         if(node == nullptr) {
             return;
         }
 
-        displayRec(node->left);
+        inorderTraversal(node->left);
         std::cout << node->data << " ";
-        displayRec(node->right);
+        inorderTraversal(node->right);
 
     }
     Node* insertRec(Node* node, int value) {
@@ -228,7 +233,7 @@ int main()
     bst.insertValue(23);
     std::cout << "No.of nodes present in BST: " << bst.countNodes() << '\n';
     std::cout << "BST in-order traversal: ";
-    bst.display();
+    bst.inorder();
 
     std::cout << "Current Maximum element in BST: " << bst.findMax() << '\n';
     std::cout << "Current Minimum element in BST: " << bst.findMin() << '\n';
@@ -247,6 +252,6 @@ int main()
 
     std::cout << "-------Delete the Tree----" << '\n';
     bst.clear();
-    bst.display();
+    std::cout << "No.of nodes present in BST: " << bst.countNodes() << '\n';
     return 0;
 }
