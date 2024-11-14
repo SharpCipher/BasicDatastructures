@@ -34,7 +34,17 @@ public:
         std::cout << '\n';
     }
 
+    // Pre-order traversal
+    void preorder() const {
+        preorderTraversal(root);
+        std::cout << '\n';
+    }
 
+    // Post-order traversal
+    void postorder() const {
+        postorderTraversal(root);
+        std::cout << '\n';
+    }
 
     // Find max element in the BST
     int findMax() const {
@@ -121,6 +131,25 @@ private:
         inorderTraversal(node->right);
 
     }
+
+    void preorderTraversal(Node* node) const {
+        if(node == nullptr) {
+            return;
+        }
+        std::cout << node->data << " ";
+        preorderTraversal(node->left);
+        preorderTraversal(node->right);
+    }
+
+    void postorderTraversal(Node* node) const {
+        if(node == nullptr) {
+            return;
+        }
+        postorderTraversal(node->left);
+        postorderTraversal(node->right);
+        std::cout << node->data << " ";
+    }
+
     Node* insertRec(Node* node, int value) {
         if(node == nullptr) {
             return new Node(value);
@@ -232,8 +261,15 @@ int main()
     bst.insertValue(56);
     bst.insertValue(23);
     std::cout << "No.of nodes present in BST: " << bst.countNodes() << '\n';
+    
     std::cout << "BST in-order traversal: ";
     bst.inorder();
+
+    std::cout << "BST pre-order traversal: ";
+    bst.preorder();
+
+    std::cout << "BST post-order traversal: ";
+    bst.postorder();
 
     std::cout << "Current Maximum element in BST: " << bst.findMax() << '\n';
     std::cout << "Current Minimum element in BST: " << bst.findMin() << '\n';
@@ -249,6 +285,15 @@ int main()
     std::cout << "Length of the longest path from the root to leaf: " << bst.height() << '\n';
 
     std::cout << "Is the current tree is a BST: " << (bst.isBST() ? "Yes" : "No")<< '\n';
+
+    std::cout << "BST in-order traversal: ";
+    bst.inorder();
+
+    std::cout << "BST pre-order traversal: ";
+    bst.preorder();
+
+    std::cout << "BST post-order traversal: ";
+    bst.postorder();
 
     std::cout << "-------Delete the Tree----" << '\n';
     bst.clear();
