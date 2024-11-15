@@ -1,4 +1,5 @@
 #include <iostream>
+#include <queue>
 
 struct Node {
     int data;
@@ -46,6 +47,12 @@ public:
         std::cout << '\n';
     }
 
+    // Level-order traversal
+    void levelorder() const {
+        levelorderTraversal(root);
+        std::cout << '\n';
+    }
+
     // Find max element in the BST
     int findMax() const {
         return findMaxRec(root)->data;
@@ -76,9 +83,6 @@ public:
         clearRec(root);
         root = nullptr;
     }
-
-    // PreOrder traversal
-
 
 private:
     void clearRec(Node* node) {
@@ -148,6 +152,33 @@ private:
         postorderTraversal(node->left);
         postorderTraversal(node->right);
         std::cout << node->data << " ";
+    }
+
+    void levelorderTraversal(Node* node) const {
+        if(root == nullptr) {
+            return;
+        }
+        std::queue<Node*> nodeQueue;
+        nodeQueue.push(root);
+
+        while(!nodeQueue.empty()) {
+            Node* current = nodeQueue.front();
+            nodeQueue.pop();
+
+            // Visit the current node
+            std::cout << current->data << " ";
+
+            // Enqueue the left child if it exists
+            if(current->left != nullptr) {
+                nodeQueue.push(current->left);
+            }
+
+            // Enqueue the right child if it exists
+            if(current->right != nullptr) {
+                nodeQueue.push(current->right);
+            }
+        }
+        std::cout << '\n';
     }
 
     Node* insertRec(Node* node, int value) {
@@ -294,6 +325,9 @@ int main()
 
     std::cout << "BST post-order traversal: ";
     bst.postorder();
+
+    std::cout << "BST level-order traversal: ";
+    bst.levelorder();
 
     std::cout << "-------Delete the Tree----" << '\n';
     bst.clear();
