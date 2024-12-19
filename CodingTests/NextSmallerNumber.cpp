@@ -24,7 +24,7 @@ int nextSmallestNumber(const std::vector<int>& arr, int x) {
     int end = n - 1;
     
     while(start <= end) {
-        int mid = (start + end)/ 2;
+        int mid = start + (end - start)/ 2;
         
         if(arr[mid] == x) {
             return arr[mid];
@@ -43,10 +43,13 @@ int nextSmallestNumber(const std::vector<int>& arr, int x) {
 
 int main()
 {
-    std::vector<int> arr = {3, 4, 6, 9, 10, 12, 14, 15, 17, 19, 21};
+    std::vector<int> arr1 = {3, 4, 6, 9, 10, 12, 14, 15, 17, 19, 21};
+    std::vector<int> arr2;
     int x;
     std::cin >> x;
-    int res = nextSmallestNumber(arr, x);
-    std::cout << res << '\n';
+    int res1 = nextSmallestNumber(arr1, x);
+    int res2 = nextSmallestNumber(arr2, x);
+    std::cout << res1 << '\n';
+    std::cout << res2 << '\n';
     return 0;
 }
