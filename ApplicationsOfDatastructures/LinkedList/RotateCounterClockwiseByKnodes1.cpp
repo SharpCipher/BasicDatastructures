@@ -41,10 +41,22 @@ class SingleLinkedList{
             std::cout << '\n';
         }
 
-        void rotateCounterclockwiseByKnodes(const int& k) {
+        void rotateCounterclockwiseByKnodes(int k) {
             if(k == 0)
                 return;
             Node* curr = head;
+            int nodeCount = 1;
+
+            // Count the number of nodes in the linked list
+            while(curr->next != nullptr) {
+                curr = curr->next;
+                nodeCount++;
+            }
+
+            if(k > nodeCount) {
+                k = k%nodeCount;
+            }
+
             int c = 1;
             while(c < k  &&  curr != nullptr) {
                 curr = curr->next;
