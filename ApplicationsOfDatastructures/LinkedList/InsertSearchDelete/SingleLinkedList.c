@@ -72,6 +72,33 @@ void displayList() {
     printf("NULL\n");
 }
 
+void deleteAtGivenPosition(int position) {
+    if(head == NULL) {
+        printf("The list is empty!!\n");
+        return;
+    }
+    struct node* temp = head;
+    struct node* prev = NULL;
+    int c = 1;
+    while(temp) {
+        if(position == c) {
+            if(prev == NULL) {
+                head = temp->next;
+                free(temp);
+                return;
+            }
+            else {
+                prev->next = temp->next;
+                free(temp);
+                return;
+            }
+        }
+        prev = temp;
+        temp = temp->next;
+        c++;
+    }
+}
+
 void deleteTheGivenData(char* inputData) {
     if(head == NULL) {
         printf("The list is empty!!\n");
@@ -161,7 +188,7 @@ int main() {
     while(!shouldExit) {
         printf( "\n1. Insert At beginning\n2. Insert At Position\n3. Insert At end\n");
         printf( "4. Display the list\n5. Delete the Given Data\n6. Delete the first node\n");
-        printf( "7. Delete the last node\n8. Search data\n9. Exit\n");
+        printf( "7. Delete the last node\n8. Delete at given position\n9. Search data\n10. Print and Exit\n");
         printf( "Enter your option: ");
         char data[IN_DATA_STR];
         int choice;
@@ -221,7 +248,13 @@ int main() {
             case 7 :
                 deleteTheLastNode();
                 break;
-            case 8 :
+            case 8:
+                printf( "Enter the position to be deleted: ");
+                int position;
+                scanf("%d", &position);
+                deleteAtGivenPosition(position);
+                break;
+            case 9 :
                 printf( "Enter the data to be searched: ");
                 fgets(searchString, IN_DATA_STR, stdin);
                 // Remove the new line charcter if present
@@ -230,7 +263,7 @@ int main() {
                 }
                 searchData(searchString);
                 break;
-            case 9 :
+            case 10 :
                 printf( "\nCurrent List Items: \n");
                 displayList();
                 printf( "Exiting...\n");
