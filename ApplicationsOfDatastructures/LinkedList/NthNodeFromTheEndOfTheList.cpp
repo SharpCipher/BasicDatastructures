@@ -1,3 +1,11 @@
+/*
+The idea is to maintain two pointers, say ptr1 and ptr2 point to the head of Linked List and move ptr2 to the Nth node from
+the head to ensure that the distance between ptr1 and ptr2 is (N – 1).
+Now, move both the pointers simultaneously until ptr2 reaches the last node. Since the distance between
+ptr1 and ptr2 is (N – 1), so when ptr2 will reach the last node, ptr1 will reach Nth node from
+the end of Linked List. Return the value of node pointed by ptr1.
+*/
+
 #include <iostream>
 
 struct Node {
