@@ -24,11 +24,15 @@ Constraints:
 1 <= nums[i] <= 109
 1 <= k <= 109
 */
+#include <vector>
+#include <algorithm>
+#include <iostream>
+
 class Solution {
 public:
-    int maxOperations(vector<int>& nums, int k) {
+    int maxOperations(std::vector<int>& nums, int k) {
         int count = 0;
-        sort(nums.begin(), nums.end());
+        std::sort(nums.begin(), nums.end());
         int i = 0;
         int j = nums.size()-1;
         while(i < j) {
@@ -49,3 +53,11 @@ public:
         return count;
     }
 };
+
+int main() {
+    std::vector<int> nums = {1, 2, 3, 4};
+    int k = 5;
+    Solution s;
+    std::cout << s.maxOperations(nums, k) << '\n';
+    return 0;
+}
