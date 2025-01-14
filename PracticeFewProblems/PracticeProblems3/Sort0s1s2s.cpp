@@ -5,15 +5,16 @@ void sort012(std::vector<int>& arr){
     int n = arr.size();
     int low = 0, mid = 0, high = n-1;
 
+    // Iterate through the array and sort the array in the order of 0s, 1s and 2s.
     while(mid <= high) {
         if(arr[mid] == 0) {
-            std::swap(arr[low++], arr[mid++]);
+            std::swap(arr[low++], arr[mid++]); // Increment both low and mid as we have already checked the value at mid.
         }
         else if(arr[mid] == 1) {
-            mid++;
+            mid++; // Increment mid as we have already checked the value at mid.
         }
         else {
-            std::swap(arr[mid], arr[high--]);
+            std::swap(arr[mid], arr[high--]); // Decrement high as we need to check the value at mid after swapping. We will not increment mid as we need to check the value at mid after swapping.
         }
     }
 }
